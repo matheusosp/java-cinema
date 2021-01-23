@@ -1,6 +1,7 @@
 package com.cinema.gerenciamento.service;
 
 import com.cinema.gerenciamento.dto.FilmeDTO;
+import com.cinema.gerenciamento.dto.SessaoDTO;
 import com.cinema.gerenciamento.entities.Filme;
 import com.cinema.gerenciamento.exception.FilmeJaRegistradoException;
 import com.cinema.gerenciamento.exception.IdNaoEncontradoException;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,10 +38,13 @@ public class FilmeService {
     @Transactional(readOnly = true)
     public List<FilmeDTO> listPagination(int page, int limit){
         List<Filme> list = repository.findAll();
+        int paginaLimite = list.size()/limit+1;
+        if(page > paginaLimite){
+            return Collections.emptyList();
+        }
         if(page>1) {
             for (int i = 1; i < page; i++) {
                 for(int j = 0;j < limit;j++){
-                    System.out.println("j== "+j);
                     list.remove(0);
                 }
             }

@@ -14,8 +14,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin("http://127.0.0.1:4200")
 @RequestMapping(value = "/filmes")
 public class FilmeController {
 

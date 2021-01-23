@@ -16,6 +16,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://127.0.0.1:4200")
 @RequestMapping(value = "/sessoes")
 public class SessaoController {
 

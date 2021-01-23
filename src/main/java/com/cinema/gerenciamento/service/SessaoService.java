@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,10 +45,14 @@ public class SessaoService {
     public List<SessaoDTO> listPagination(int page, int limit){
         List<Sessao> list = repository.findAll();
 
+        int paginaLimite = list.size()/limit+1;
+
+        if(page > paginaLimite){
+            return Collections.emptyList();
+        }
         if(page>1) {
             for (int i = 1; i < page; i++) {
                 for(int j = 0;j < limit;j++){
-                    System.out.println("j== "+j);
                     list.remove(0);
                 }
             }
