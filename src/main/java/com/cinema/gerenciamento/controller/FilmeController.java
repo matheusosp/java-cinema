@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin("http://127.0.0.1:4200")
+@CrossOrigin("*")
 @RequestMapping(value = "/filmes")
 public class FilmeController {
 
