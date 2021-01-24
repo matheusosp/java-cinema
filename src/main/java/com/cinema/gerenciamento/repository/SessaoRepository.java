@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface SessaoRepository extends JpaRepository<Sessao,Long> {
 
-    Optional<Sessao> findByFilmeId(Long id);
+    Optional<List<Sessao>> findByFilmeId(Long id);
     List<Sessao> findBySalaId(Long id);
 
 }
