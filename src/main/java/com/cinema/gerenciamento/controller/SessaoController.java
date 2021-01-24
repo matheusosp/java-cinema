@@ -1,6 +1,8 @@
 package com.cinema.gerenciamento.controller;
 
+import com.cinema.gerenciamento.dto.SalaDTO;
 import com.cinema.gerenciamento.dto.SessaoDTO;
+import com.cinema.gerenciamento.entities.Sala;
 import com.cinema.gerenciamento.exception.FilmeNaoExisteException;
 import com.cinema.gerenciamento.exception.IdNaoEncontradoException;
 import com.cinema.gerenciamento.exception.SalaOcupadaException;
@@ -16,7 +18,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://127.0.0.1:4200")
+@CrossOrigin("*")
 @RequestMapping(value = "/sessoes")
 public class SessaoController {
 
@@ -39,6 +41,12 @@ public class SessaoController {
     public ResponseEntity<List<SessaoDTO>> listPagination(@PathVariable int page,@PathVariable int limit){
         List<SessaoDTO> list = service.listPagination(page,limit);
         return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping("/sala/search={search}")
+    public ResponseEntity<SalaDTO> listPagination(@PathVariable String search){
+        SalaDTO sala = service.searchSala(search);
+        return ResponseEntity.ok().body(sala);
     }
 
     @PostMapping

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,7 +63,7 @@ public class FilmeService {
     @Transactional
     public FilmeDTO create(FilmeDTO dto) throws FilmeJaRegistradoException {
 
-        if(repository.findByTitulo(dto.getTitulo()).isPresent()){
+        if(repository.findByTitulo(dto.getTitulo()) != null){
             throw new FilmeJaRegistradoException(String.format("Filme com o titulo %s ja foi registrado.", dto.getTitulo()));
         }
         Filme filme = new Filme(null,dto.getTitulo(),dto.getUrlImagem(),dto.getDescricao(), dto.getDuracao());
@@ -93,5 +94,35 @@ public class FilmeService {
     }
     public void verifyIdExists(Long id) throws IdNaoEncontradoException{
         repository.findById(id).orElseThrow(() -> new IdNaoEncontradoException("Id não encontrado"));
+    }
+
+    public List<FilmeDTO> findByNameContaining(String query) {
+        List<Filme> list= repository.findByTituloContaining(query);
+        return list.stream().map(FilmeDTO::new).collect(Collectors.toList());
+    }
+
+    public FilmeDTO findByName(String query) throws IdNaoEncontradoException{
+        Filme filme= repository.findByTitulo(query);
+        if(filme.getId() == null){
+            throw new IdNaoEncontradoException("Filme não encontrado");
+        }
+
+        return new FilmeDTO(filme);
+    }
+
+    public List<FilmeDTO> listPaginationFind(int page, int limit, String query) {
+        List<Filme> list = repository.findByTituloContaining(query);
+        int paginaLimite = list.size()/limit+1;
+        if(page > paginaLimite){
+            return Collections.emptyList();
+        }
+        if(page>1) {
+            for (int i = 1; i < page; i++) {
+                for(int j = 0;j < limit;j++){
+                    list.remove(0);
+                }
+            }
+        }
+        return list.stream().limit(limit).map(FilmeDTO::new).collect(Collectors.toList());
     }
 }

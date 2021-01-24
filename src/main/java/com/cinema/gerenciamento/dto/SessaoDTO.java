@@ -71,10 +71,12 @@ public class SessaoDTO implements Serializable {
     }
 
     public void setData(String data) {
-        String pattern = "yyyy-MM-dd";
-        Date date = new Date(data);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        data = simpleDateFormat.format(date);
+        try {
+            String pattern = "yyyy-MM-dd";
+            Date date = new Date(data);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            data = simpleDateFormat.format(date);
+        }catch (Exception e) { }
         this.data = data;
     }
 

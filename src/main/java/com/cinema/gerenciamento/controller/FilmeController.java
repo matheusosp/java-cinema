@@ -42,6 +42,24 @@ public class FilmeController {
         return ResponseEntity.ok().body(list);
     }
 
+    @GetMapping("/page={page}/limit={limit}/q={query}")
+    public ResponseEntity<List<FilmeDTO>> listPaginationName(@PathVariable int page,@PathVariable int limit,@PathVariable String query){
+        List<FilmeDTO> list = service.listPaginationFind(page,limit, query);
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping("/q={query}")
+    public ResponseEntity<List<FilmeDTO>> findByNameContaining(@PathVariable String query){
+        List<FilmeDTO> list = service.findByNameContaining(query);
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping("/search={query}")
+    public ResponseEntity<FilmeDTO> findByName(@PathVariable String query) throws IdNaoEncontradoException{
+        FilmeDTO filme = service.findByName(query);
+        return ResponseEntity.ok().body(filme);
+    }
+
     @PostMapping
     public ResponseEntity<FilmeDTO> insert(@RequestBody FilmeDTO dto) throws FilmeJaRegistradoException {
         dto = service.create(dto);

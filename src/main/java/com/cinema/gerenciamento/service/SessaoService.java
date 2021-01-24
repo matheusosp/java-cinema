@@ -108,7 +108,7 @@ public class SessaoService {
         SessaoDTO sessaoDTO= findOne(id);
         String data = sessaoDTO.getData() +"T"+ sessaoDTO.getHora();
         LocalDateTime dataFinal = LocalDateTime.parse(data);
-        if(LocalDateTime.now().isBefore(dataFinal.minusDays(10))){
+        if(LocalDateTime.now().isBefore(dataFinal.minusDays(10)) || LocalDateTime.now().isAfter(dataFinal)){
             repository.deleteById(id);
         }else{
             throw new SessionDeleteException("Uma sessão só pode ser removida se faltar 10 dias ou mais para que ela ocorra.");
@@ -121,6 +121,9 @@ public class SessaoService {
             LocalDateTime dataItem = LocalDateTime.parse(date);
             LocalDateTime horaFinalItem = dto.getHorarioFinal(dto.getFilme().getDuracao());
             boolean verifica = verificaAsDatas(testDate, dataItem, horaFinalItem);
+    //        System.out.println("dataaaaaaaaaa====="+testDate);
+    //        System.out.println(dataItem);
+    //        System.out.println(horaFinalItem);
             if(verifica==true){
                 throw new SalaOcupadaException("Esta sala esta ocupada nesta data");
             }
@@ -137,5 +140,10 @@ public class SessaoService {
         Filme filme = filmeRepositoy.getOne(dto.getFilme().getId());
         filmeRepositoy.findById(filme.getId()).orElseThrow(() -> new FilmeNaoExisteException("O Filme informado não foi encontrado"));
         return filme;
+    }
+
+    public SalaDTO searchSala(String search) {
+        Sala sala = salaRepository.findByNome(search);
+        return new SalaDTO(sala);
     }
 }
