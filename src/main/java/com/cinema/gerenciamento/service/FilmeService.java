@@ -86,7 +86,7 @@ public class FilmeService {
     @Transactional
     public void delete(Long id) throws ImpossivelDeletarException, IdNaoEncontradoException{
         verifyIdExists(id);
-        if(sessaoRepository.findByFilmeId(id).isPresent()){
+        if(sessaoRepository.findByFilmeId(id).size() > 0){
             throw new ImpossivelDeletarException("Não é possivel deletar um filme com uma sessao vinculada");
         }else {
             repository.deleteById(id);
