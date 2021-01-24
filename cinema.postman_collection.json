@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "fdc63559-f6f6-4c6d-a4d9-5b79f2f845ca",
+		"name": "cinema",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "listAll filmes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/filmes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"filmes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listAll filmes com paginacao",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/filmes/page=3/limit=10",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"filmes",
+						"page=3",
+						"limit=10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listAll sessao com paginacao",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listOne filmes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/filmes/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"filmes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listOne Sessao",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/sessoes/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"sessoes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listAll sessoes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/sessoes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"sessoes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create filme",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"titulo\": \"MIB: Homens de Preto 2\",\r\n      \"urlImagem\": \"https://m.media-amazon.com/images/M/MV5BOTlhYTVkMDktYzIyNC00NzlkLTlmN2ItOGEyMWQ4OTA2NDdmXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_UX182_CR0,0,182,268_AL_.jpg\",\r\n      \"descricao\": \"A police officer joins a secret organization that polices and monitors extraterrestrial interactions on Earth.\",\r\n        \"duracao\":50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/filmes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"filmes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create sessao",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"data\": \"Tue Jan 04 2021 00:00:00 GMT-0300  (Horário Padrão de Brasília)\",\r\n        \"hora\": \"Tue Jan 05 2021 11:20:00 GMT-0300  (Horário Padrão de Brasília)\",\r\n        \"valorIngresso\":25.50,\r\n        \"tipoAnimacao\":\"2D\",\r\n        \"tipoAudio\":\"ORIGINAL\",\r\n        \"filme\":{\r\n            \"id\":1\r\n        },\r\n        \"sala\":{\r\n            \"id\":1\r\n        }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/sessoes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"sessoes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update filme",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"titulo\": \"teste2\",\r\n      \"urlImagem\": \"https://m.media-amazon.com/images/M/MV5BOTlhYTVkMDktYzIyNC00NzlkLTlmN2ItOGEyMWQ4OTA2NDdmXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_UX182_CR0,0,182,268_AL_.jpg\",\r\n      \"descricao\": \"A police officer joins a secret organization that polices and monitors extraterrestrial interactions on Earth.\",\r\n        \"duracao\":50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/filmes/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"filmes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update sessao",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete filme",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/filmes/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"filmes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete sessao",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/sessoes/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"sessoes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findByTitle",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/filmes/search=MIB: Homens de Preto",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"filmes",
+						"search=MIB: Homens de Preto"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
